@@ -1,5 +1,6 @@
 package ctec.view;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,7 +19,7 @@ public class RecursionPanel extends JPanel
 	private JButton fibonacciButton;
 	private JButton factorialButton;
 	private JTextField inputField;
-	private JTextArea displayArea;
+	private JTextArea resultsArea;
 	
 	public RecursionPanel(RecursionController baseController)
 	{
@@ -26,8 +27,8 @@ public class RecursionPanel extends JPanel
 		baseLayout = new SpringLayout();
 		fibonacciButton = new JButton("Fibonacci");
 		factorialButton = new JButton("Factorial");
-		inputField = new JTextField("Text Field");
-		displayArea = new JTextArea("Text Area");
+		inputField = new JTextField();
+		resultsArea = new JTextArea();
 		
 		setupPanel();
 		setupLayout();
@@ -40,21 +41,25 @@ public class RecursionPanel extends JPanel
 		this.add(fibonacciButton);
 		this.add(factorialButton);
 		this.add(inputField);
-		this.add(displayArea);
+		this.add(resultsArea);
+		resultsArea.setWrapStyleWord(true);
+		resultsArea.setLineWrap(true);
+		resultsArea.setEditable(false);
+		this.setBackground(Color.GRAY);
 	}
 	
 	private void setupLayout()
 	{
-		baseLayout.putConstraint(SpringLayout.WEST, displayArea, 10, SpringLayout.WEST, this);
+		baseLayout.putConstraint(SpringLayout.WEST, resultsArea, 10, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.WEST, inputField, 10, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, inputField, -10, SpringLayout.SOUTH, this);
-		baseLayout.putConstraint(SpringLayout.NORTH, displayArea, 10, SpringLayout.NORTH, this);
-		baseLayout.putConstraint(SpringLayout.SOUTH, displayArea, -6, SpringLayout.NORTH, fibonacciButton);
-		baseLayout.putConstraint(SpringLayout.EAST, inputField, 0, SpringLayout.EAST, displayArea);
+		baseLayout.putConstraint(SpringLayout.NORTH, resultsArea, 10, SpringLayout.NORTH, this);
+		baseLayout.putConstraint(SpringLayout.SOUTH, resultsArea, -6, SpringLayout.NORTH, fibonacciButton);
+		baseLayout.putConstraint(SpringLayout.EAST, inputField, 0, SpringLayout.EAST, resultsArea);
 		baseLayout.putConstraint(SpringLayout.NORTH, fibonacciButton, 0, SpringLayout.NORTH, factorialButton);
 		baseLayout.putConstraint(SpringLayout.WEST, fibonacciButton, 54, SpringLayout.WEST, this);
 		baseLayout.putConstraint(SpringLayout.SOUTH, factorialButton, -6, SpringLayout.NORTH, inputField);
-		baseLayout.putConstraint(SpringLayout.EAST, displayArea, -10, SpringLayout.EAST, this);
+		baseLayout.putConstraint(SpringLayout.EAST, resultsArea, -10, SpringLayout.EAST, this);
 		baseLayout.putConstraint(SpringLayout.EAST, factorialButton, -71, SpringLayout.EAST, this);
 	}
 	
@@ -64,7 +69,11 @@ public class RecursionPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				
+				String input = inputField.getText();
+				if(checkInput(input))
+				{
+					resultsArea.append(baseController.doFibinacci(input) + "\n");
+				}
 			}
 		});
 		
@@ -72,8 +81,29 @@ public class RecursionPanel extends JPanel
 		{
 			public void actionPerformed(ActionEvent click)
 			{
-				
+				String input = inputField.getText();
+				if(checkInput(input))
+				{
+					resultsArea.append(baseController.doFactorial(input) + "\n");
+				}
 			}
 		});
+	}
+	
+	private boolean checkInput(String input)
+	{
+		boolean isNumber = false;
+		
+		try
+		{
+			Double.parseDouble(input);
+			isNumber = true;
+		}
+		catch(Exception e)
+		{
+			resultsArea.setText("You must type in a number.");
+		}
+		
+		return isNumber;
 	}
 }
