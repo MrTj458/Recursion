@@ -24,9 +24,21 @@ public class RecursionController
 		return calculatedValue;
 	}
 	
+	public String doFibonacciIterative(String input)
+	{
+		calculatedValue = "The fibonacci sequence at " + input + " is: " + Double.toString(mathTool.fibonacciIterative(Double.parseDouble(input)));
+		return calculatedValue;
+	}
+	
 	public String doFactorial(String input)
 	{
 		calculatedValue = input + "! is: " + Double.toString(mathTool.factorialNumber(Double.parseDouble(input)));
+		return calculatedValue;
+	}
+	
+	public String doFactorialIterative(String input)
+	{
+		calculatedValue = input + "! is: " + Double.toString(mathTool.factorialIterative(Double.parseDouble(input)));
 		return calculatedValue;
 	}
 }
