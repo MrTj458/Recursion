@@ -7,12 +7,12 @@ public class RecursionTool
 		
 	}
 	
-	public double fibonacciNumber(double position)
+	public double getFibNumber(double position)
 	{
 		//Bounds check
 		if(position < 0)
 		{
-			return Double.MIN_VALUE;
+			return Integer.MIN_VALUE;
 		}
 		
 		//Base case
@@ -22,7 +22,7 @@ public class RecursionTool
 		}
 		else //recursive case
 		{
-			return fibonacciNumber(position - 1) + fibonacciNumber(position - 2);
+			return getFibNumber(position - 1) + getFibNumber(position - 2);
 		}
 	}
 	
@@ -52,12 +52,12 @@ public class RecursionTool
 		return b;
 	}
 	
-	public double factorialNumber(double position)
+	public double getFactorialNumber(double position)
 	{
 		//Bounds check
 		if(position < 0)
 		{
-			return Double.MIN_VALUE;
+			return Integer.MIN_VALUE;
 		}
 		
 		if(position == 0)
@@ -66,7 +66,7 @@ public class RecursionTool
 		}
 		else
 		{
-			return position * factorialNumber(position - 1);
+			return position * getFactorialNumber(position - 1);
 		}
 	}
 	

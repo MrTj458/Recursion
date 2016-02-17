@@ -20,7 +20,7 @@ public class RecursionController
 	
 	public String doFibinacci(String input)
 	{
-		calculatedValue = "The fibonacci sequence at " + input + " is: " + Double.toString(mathTool.fibonacciNumber(Double.parseDouble(input)));
+		calculatedValue = "The fibonacci sequence at " + input + " is: " + Double.toString(mathTool.getFibNumber(Double.parseDouble(input)));
 		return calculatedValue;
 	}
 	
@@ -32,7 +32,7 @@ public class RecursionController
 	
 	public String doFactorial(String input)
 	{
-		calculatedValue = input + "! is: " + Double.toString(mathTool.factorialNumber(Double.parseDouble(input)));
+		calculatedValue = input + "! is: " + Double.toString(mathTool.getFactorialNumber(Double.parseDouble(input)));
 		return calculatedValue;
 	}
 	
